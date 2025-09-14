@@ -15,3 +15,9 @@ C-ALINEA is an enhanced version of the ALINEA algorithm that balances efficiency
 - **Aristotelian fairness:** Allocate access proportionally based on demand or priority.  
 
 Network-wide coordination considers neighboring ramp flows to avoid over-serving a single ramp and distribute access more evenly across the corridor.
+
+
+![Amsterdam Study Case](figures/Amsterdam_Studycase.png)
+
+![Ramp Metering Blockscheme](figures/Blockscheme_RM.png)
+
