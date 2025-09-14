@@ -17,12 +17,15 @@ C-ALINEA is an enhanced version of the ALINEA algorithm that balances efficiency
 Network-wide coordination considers neighboring ramp flows to avoid over-serving a single ramp and distribute access more evenly across the corridor.
 
 
-<p align="center">
-  <img src="figures/Amsterdam_Studycase.png" alt="Amsterdam Study Case" width="48%"/>
-  <img src="figures/Blockscheme_RM.png" alt="Ramp Metering Blockscheme" width="48%"/>
-</p>
-
-<p align="center">
-  <em>Figure 1 – Amsterdam Study Case</em> &nbsp;&nbsp;&nbsp;
+<table>
+<tr>
+<td align="center" width="50%">
+  <img src="figures/Amsterdam_Studycase.png" alt="Amsterdam Study Case" width="95%"/><br/>
+  <em>Figure 1 – Amsterdam Study Case</em>
+</td>
+<td align="center" width="50%">
+  <img src="figures/Blockscheme_RM.png" alt="Ramp Metering Blockscheme" width="95%"/><br/>
   <em>Figure 2 – Ramp Metering Blockscheme</em>
-</p>
+</td>
+</tr>
+</table>
