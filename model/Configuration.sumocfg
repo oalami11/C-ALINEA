@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+    <!-- SIMULATION SETTINGS -->
+    <time>
+        <begin value="0"/>
+        <end value="82800"/> <!-- 24 hours, from 00:00 - 24:00 -->
+    </time>
+    
+    <!-- PROCESSING OPTIONS -->
+    <processing>
+        <step-length value="1"/>
+        <time-to-teleport value="-1"/> <!-- Disable Teleportation -->
+		<device.emissions.period value="10" />
+		<summary-output.period value="300"/>
+    </processing>
+    
+    <!-- INPUT FILES -->
+    <input>
+        <net-file value="Network_fin.net.xml"/>
+        <route-files value="demand_model_amsterdam.rou.xml"/>
+	<additional-files value="Additionnal.add.xml"/>  
+<!-- ,edge_logging.xml -->
+    </input>	
+	
+    <!-- REPORT OPTIONS -->
+    <report>
+        <verbose value="true"/>
+        <no-step-log value="true"/>
+    </report>
+</configuration>
