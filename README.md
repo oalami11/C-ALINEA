@@ -18,6 +18,6 @@ Network-wide coordination considers neighboring ramp flows to avoid over-serving
 
 
 <p align="center">
-  <img src="figures/Amsterdam_Studycase.png" alt="Amsterdam Study Case" width="45%"/>
-  <img src="figures/Blockscheme_RM.png" alt="Ramp Metering Blockscheme" width="45%"/>
+  <img src="figures/Amsterdam_Studycase.png" alt="Amsterdam Study Case" width="50%"/>
+  <img src="figures/Blockscheme_RM.png" alt="Ramp Metering Blockscheme" width="50%"/>
 </p>
