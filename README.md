@@ -29,3 +29,17 @@ Network-wide coordination considers neighboring ramp flows to avoid over-serving
 </td>
 </tr>
 </table>
+
+
+A microsimulation-based case study on Amsterdam’s A10 Ring Road demonstrates how **C-ALINEA** can substantially improve both efficiency and fairness of highway traffic operations. Unlike traditional ramp metering, C-ALINEA coordinates neighboring ramps to avoid overserving a single entry point and distributes mainline access more evenly across the network.
+
+The simulation results show that **Method $M1$ with $N=3$ neighbors** delivers outstanding performance:
+
+- **Efficiency gains:** Total network delay reduced by **58.8%** compared to uncontrolled conditions, outperforming ALINEA (**37.9%**) and METALINE (**42.1%**).  
+  Average network speed increased from **47.0 km/h** to **66.7 km/h**, and average per-vehicle delay dropped to just **2.1 minutes** — all while maintaining vehicle throughput (>40,000 vehicles).  
+
+- **Fairness improvements:** Lowest **Gini coefficient** for vehicle distribution (**0.2834**) and delay inequality (**0.1892**), with average delay reduced to **125.4 s** (**56% improvement** over No Control, **30% better** than ALINEA).  
+
+- **Trade-offs:** Higher metering rates (**17.9–25.8% red time** vs. **9.6%** for ALINEA) and sensitivity when using **Method $M2$ with $N=1$** (poor performance).
+
+C-ALINEA balances network efficiency and equity while remaining lightweight and practical. It preserves ALINEA’s simplicity and robustness, only requiring reliable inter-ramp communication, a simple firmware/software update, and basic integration with existing monitoring systems — no expensive centralized optimization is needed.
