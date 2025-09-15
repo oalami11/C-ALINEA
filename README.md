@@ -99,8 +99,17 @@ This repository provides the complete simulation framework and implementation co
 
 ## Install & Run Guide
 ```
-pip install -r requirements.txt
-python code/RunSimulation.py --help
-# python RunSimulation.py --sumo-path [A] --controller [B]
+pip install -r Requirement.txt
+python code/RunSimulationRampMetering.py --help
+# python RunSimulationRampMetering.py --sumo-path [A] --controller [B] --
 
 ```
+
+## 📑 Log Files
+
+| Log-File          | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| Log_summary.xml  | Log file with information about the network's traffic state at regular intervals. |
+| TripInfos.xml    | Log file with information about single vehicles' trips.                     |
+| analysis.txt     | Text file summarizing key simulation metrics (e.g., delay, waiting time, recovery time). |
+
