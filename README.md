@@ -22,7 +22,7 @@ Highway congestion leads to traffic diversion into cities, increased emissions, 
 </table>
 
 
-C-ALINEA is an enhanced version of the ALINEA algorithm that balances efficiency and fairness in ramp metering.  
+C-ALINEA is an enhanced version of the ALINEA algorithm that balances efficiency and fairness in ramp metering. It employs two distinct coordination methods with varying levels of aggressiveness in neighbor influence. Method M1 uses global normalization across the entire network, while Method M2 applies local normalization based on each ramp's immediate vicinity. For each method, the algorithm can be configured to consider either 1, 2, or 3 neighboring ramps both upstream and downstream, creating a coordination window that ranges from 3 total ramps (N=1) to 7 total ramps (N=3). This flexible neighbor selection allows the algorithm to balance between computational simplicity and coordination effectiveness, with higher N values generally providing more comprehensive network awareness at the cost of increased complexity.
 
 - **Utilitarianism:** Maximize overall benefit for all users.  
 - **Rawlsian fairness:** Focus on helping the most disadvantaged first.  
