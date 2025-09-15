@@ -59,3 +59,7 @@ The simulation results show that the best configuration of C-ALINEA delivers rem
 - **Trade-offs:** Higher metering rates (**17.9–25.8% red time** vs. **9.6%** for ALINEA) and sensitivity when using **Method $M2$ with $N=1$** (poor performance).
 
 C-ALINEA balances network efficiency and equity while remaining lightweight and practical. It preserves ALINEA’s simplicity and robustness, only requiring reliable inter-ramp communication, a simple firmware/software update, and basic integration with existing monitoring systems — no expensive centralized optimization is needed.
+
+
+
+##This repository contains the following
