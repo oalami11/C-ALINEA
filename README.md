@@ -56,7 +56,7 @@ The simulation results show that the best configuration of C-ALINEA delivers rem
 
 - **Fairness improvements:** Lowest **Gini coefficient** for vehicle distribution (**0.2834**) and delay inequality (**0.1892**), with average delay reduced to **125.4 s** (**56% improvement** over No Control, **30% better** than ALINEA).  
 
-- **Trade-offs:** Higher metering rates (**17.9–25.8% red time** vs. **9.6%** for ALINEA) and sensitivity when using **Method $M2$ with $N=1$** (poor performance).
+- **Trade-offs:** Higher metering rates (**17.9–25.8% red time** vs. **9.6%** for ALINEA).
 
 C-ALINEA balances network efficiency and equity while remaining lightweight and practical. It preserves ALINEA’s simplicity and robustness, only requiring reliable inter-ramp communication, a simple firmware/software update, and basic integration with existing monitoring systems — no expensive centralized optimization is needed.
 
