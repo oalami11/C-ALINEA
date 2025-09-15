@@ -113,3 +113,9 @@ python code/RunSimulationRampMetering.py --help
 | TripInfos.xml    | Log file with information about single vehicles' trips.                     |
 | analysis.txt     | Text file summarizing key simulation metrics (e.g., delay, waiting time, recovery time). |
 
+
+## Credits
+```
+Kevin Riehl, Omar Alami Badissi, Anastasios Kouvelas
+"C-ALINEA – Coordinated Control Algorithm for Fairness in Ramp Metering", 2025.
+```
