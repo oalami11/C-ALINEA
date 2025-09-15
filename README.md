@@ -6,6 +6,22 @@ This repository contains a Python implementation of a traffic microsimulation to
 ## Abstract
 Highway congestion leads to traffic diversion into cities, increased emissions, and longer travel times. Ramp metering (traffic lights at on-ramps) is an effective way to reduce congestion, but it often faces public opposition due to perceived unfairness — some ramps wait much longer than others.
 
+
+
+<table>
+<tr>
+<td align="center" width="50%">
+  <img src="figures/heatmap_no_control.png" alt="heatmap no control" width="95%"/><br/>
+  <em>Figure 1 – Uncontrolled Highway </em>
+</td>
+<td align="center" width="50%">
+  <img src="figures/heatmap_RM.png" alt="heatmap RM" width="95%"/><br/>
+  <em>Figure 2 – Ramp-Metered Highway </em>
+</td>
+</tr>
+</table>
+
+
 C-ALINEA is an enhanced version of the ALINEA algorithm that balances efficiency and fairness in ramp metering.  
 
 - **Utilitarianism:** Maximize overall benefit for all users.  
@@ -21,11 +37,11 @@ Network-wide coordination considers neighboring ramp flows to avoid over-serving
 <tr>
 <td align="center" width="50%">
   <img src="figures/Amsterdam_Studycase.png" alt="Amsterdam Study Case" width="95%"/><br/>
-  <em>Figure 1 – Amsterdam Study Case</em>
+  <em>Figure 3 – Amsterdam Study Case</em>
 </td>
 <td align="center" width="50%">
   <img src="figures/Blockscheme_RM.png" alt="Ramp Metering Blockscheme" width="95%"/><br/>
-  <em>Figure 2 – Ramp Metering Blockscheme</em>
+  <em>Figure 4 – Ramp Metering Blockscheme</em>
 </td>
 </tr>
 </table>
