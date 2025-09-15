@@ -65,9 +65,30 @@ C-ALINEA balances network efficiency and equity while remaining lightweight and 
 
 
 ## This repository contains the following
-- code/
-  - RunSimulation.py
-  - create_road_sequence.py
-- data/
-  - RoadSequence_of_Edges.xlsx
 
+```
+/
+├── code/
+│   ├── RunSimulation.py
+│   └── ...
+├── data/
+│   ├── RoadSequence_of_Edges.xlsx
+│   └── ...
+├── figures/
+│   ├── ...
+│   └── ...
+├── logs/
+│   ├── logs_C_ALINEA_M1_N1.zip
+│   ├── logs_C_ALINEA_M1_N2.zip
+│   ├── logs_C_ALINEA_M1_N3.zip
+│   ├── logs_C_ALINEA_M2_N1.zip
+│   ├── logs_C_ALINEA_M2_N2.zip
+│   ├── logs_C_ALINEA_M2_N3.zip
+│   ├── logs_ALINEA.zip
+│   ├── logs_METALINE.zip
+│   └── logs_NO_CONTROL.zip
+└── model/
+├── Configuration.sumocfg
+├── Network.net.xml
+└── ...
+```
