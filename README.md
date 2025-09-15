@@ -89,7 +89,7 @@ This repository provides the complete simulation framework and implementation co
 │   └── logs_NO_CONTROL.zip
 └── model/
 ├── Configuration.sumocfg
-├── Network.net.xml
+├── Network_fin.net.xml
 └── ...
 ```
 - **code/** - Contains the main simulation scripts and algorithm implementations
