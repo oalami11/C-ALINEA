@@ -65,10 +65,9 @@ C-ALINEA balances network efficiency and equity while remaining lightweight and 
 
 
 ## This repository contains the following
-├── code/
-│   ├── RunSimulation.py
-│   └── create_road_sequence.py
-├── data/
-│   └── RoadSequence_of_Edges.xlsx
-
+- code/
+  - RunSimulation.py
+  - create_road_sequence.py
+- data/
+  - RoadSequence_of_Edges.xlsx
 
