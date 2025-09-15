@@ -97,7 +97,7 @@ This repository provides the complete simulation framework and implementation co
 - **logs/** - Stores compressed simulation output files for all tested control strategies
 - **model/** - Houses the complete SUMO traffic simulation model and configuration files
 
-
+## Install & Run Guide
 ```
 pip install -r requirements.txt
 python code/RunSimulation.py --help
