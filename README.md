@@ -64,8 +64,8 @@ C-ALINEA balances network efficiency and equity while remaining lightweight and 
 
 
 
-## This repository contains the following
-
+## Repository Content
+This repository provides the complete simulation framework and implementation code necessary to replicate the research findings presented in our study. The repository is organized as follows:
 ```
 /
 ├── code/
@@ -92,3 +92,7 @@ C-ALINEA balances network efficiency and equity while remaining lightweight and 
 ├── Network.net.xml
 └── ...
 ```
+- **code/** - Contains the main simulation scripts and algorithm implementations
+- **figures/** - Includes visualization outputs and charts referenced in the publication  
+- **logs/** - Stores compressed simulation output files for all tested control strategies
+- **model/** - Houses the complete SUMO traffic simulation model and configuration files
