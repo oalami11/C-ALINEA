@@ -112,7 +112,7 @@ Additional parameters for COOR_ALINEA:
 - --neighbors [N] Number of neighbors (1, 2, or 3)
 - --method [M] Weight calculation method (1 or 2)
 
-## Example Command To Launch Simulation
+# Example Command To Launch Simulation
 
 with NO_CONTROL (baseline)
 ```
