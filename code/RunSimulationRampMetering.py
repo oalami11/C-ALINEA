@@ -10,7 +10,7 @@
 This code implements multiple ramp metering algorithms for highway networks:
 - NO_CONTROL: Baseline without ramp metering
 - ALINEA: Standard ALINEA algorithm
-- COOR_ALINEA: Coordinated ALINEA with neighbor consideration
+- C_ALINEA: Coordinated ALINEA with neighbor consideration
 - METALINE: Network-wide density control algorithm
 
 Features include comprehensive data analysis, heatmap generation, and OD analysis.
@@ -18,7 +18,7 @@ Features include comprehensive data analysis, heatmap generation, and OD analysi
 Usage Examples:
 python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller NO_CONTROL
 python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA
-python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1
+python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller C_ALINEA --neighbors 2 --method 1
 python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE
 """
 
@@ -58,7 +58,7 @@ ANALYSIS_END = 67000               # Analysis period end
 Q_MIN, Q_MAX = 0, 1800            # Flow rate limits (veh/h)
 avg_acc = 2                        # Average acceleration factor
 C = 60                             # Traffic light cycle duration (seconds)
-K_c = 0.5                          # Coordination gain for COOR_ALINEA
+K_c = 0.5                          # Coordination gain for C_ALINEA
 
 # #############################################################################
 # ## NETWORK CONFIGURATION - REPLACE WITH YOUR NETWORK DATA
@@ -171,7 +171,7 @@ def alinea(q_prev, occ, K_a, occ_targ):
     r = max(0, r)
     return q, r
 
-def coor_alinea(q_prev, occ, K_a, occ_targ, flow_buffers, weights):
+def C_alinea(q_prev, occ, K_a, occ_targ, flow_buffers, weights):
     """Coordinated ALINEA algorithm with neighbor flow consideration"""
     # Basic ALINEA calculation
     q = q_prev + K_a * (occ_targ - occ)
@@ -788,9 +788,9 @@ def print_help():
     print("\nAvailable Controllers:")
     print("  NO_CONTROL            No ramp metering (baseline)")
     print("  ALINEA               Standard ALINEA algorithm") 
-    print("  COOR_ALINEA          Coordinated ALINEA algorithm")
+    print("  C_ALINEA          Coordinated ALINEA algorithm")
     print("  METALINE             Network-wide density control (METALINE)")
-    print("\nAdditional Options for COOR_ALINEA:")
+    print("\nAdditional Options for C_ALINEA:")
     print("  --neighbors [N]       Number of neighbors (1, 2, or 3)")
     print("  --method [M]          Weight calculation method (1 or 2)")
     print("\nExample Commands:")
@@ -799,7 +799,7 @@ def print_help():
     print("\n2. Standard ALINEA:")
     print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA")
     print("\n3. Coordinated ALINEA with 2 neighbors, method 1:")
-    print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1")
+    print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller C_ALINEA --neighbors 2 --method 1")
     print("\n4. METALINE network-wide control:")
     print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE")
     print("\nNote: Update the configuration file path in the code before running.")
@@ -844,18 +844,18 @@ def parse_arguments():
         sys.exit(1)
     
     # Validate controller
-    valid_controllers = ['NO_CONTROL', 'ALINEA', 'COOR_ALINEA', 'METALINE']
+    valid_controllers = ['NO_CONTROL', 'ALINEA', 'C_ALINEA', 'METALINE']
     if args['controller'] not in valid_controllers:
         print(f"Error: Invalid controller '{args['controller']}'. Must be one of: {valid_controllers}")
         sys.exit(1)
     
-    # Validate COOR_ALINEA specific arguments
-    if args['controller'] == 'COOR_ALINEA':
+    # Validate C_ALINEA specific arguments
+    if args['controller'] == 'C_ALINEA':
         if 'neighbors' not in args:
-            print("Error: --neighbors is required for COOR_ALINEA")
+            print("Error: --neighbors is required for C_ALINEA")
             sys.exit(1)
         if 'method' not in args:
-            print("Error: --method is required for COOR_ALINEA")
+            print("Error: --method is required for C_ALINEA")
             sys.exit(1)
         if args['neighbors'] not in [1, 2, 3]:
             print("Error: --neighbors must be 1, 2, or 3")
@@ -881,7 +881,7 @@ def run_single_simulation(args):
     print(f"  SUMO Path: {sumo_path}")
     
     # Initialize controller-specific parameters
-    if controller == 'coor_alinea':
+    if controller == 'C_alinea':
         n_neighbors = args['neighbors']
         method = args['method']
         print(f"  Neighbors: {n_neighbors}")
@@ -919,7 +919,7 @@ def run_single_simulation(args):
                 metaline_controller = None
                 
                 # Initialize controller-specific structures
-                if controller == "coor_alinea":
+                if controller == "C_alinea":
                     flow_buffers = {
                         ramp_id: {
                             "self": deque(maxlen=60),
@@ -947,7 +947,7 @@ def run_single_simulation(args):
                 }
                 
                 # Configure simulation files with proper naming
-                if controller == "coor_alinea":
+                if controller == "C_alinea":
                     suffix = f"{controller}_{n_neighbors}neigh_method{method}_K{K_a}_target{occ_targ}_{seed}"
                 elif controller in ["no_control", "metaline"]:
                     suffix = f"{controller}_{seed}"
@@ -981,7 +981,7 @@ def run_single_simulation(args):
                         # METALINE handles all ramps globally
                         metaline_controller.step(t)
                     else:
-                        # Individual ramp control (no_control, alinea, coor_alinea)
+                        # Individual ramp control (no_control, alinea, C_alinea)
                         if t < WARM_UP:
                             # Warm-up period: no control (all lights green)
                             for ramp_id in RAMP_ORDER:
@@ -1006,7 +1006,7 @@ def run_single_simulation(args):
                                 elif controller == "alinea":
                                     q, r = alinea(q_prev[ramp_id], occ, K_a, occ_targ)
                                     q_prev[ramp_id] = q
-                                elif controller == "coor_alinea":
+                                elif controller == "C_alinea":
                                     # Get neighbor indices for coordination
                                     neighbors = {}
                                     for j in range(1, n_neighbors + 1):
@@ -1029,7 +1029,7 @@ def run_single_simulation(args):
                                     weights = calculate_weights(DISTANCES[ramp_id], n_neighbors, method)
                                     
                                     # Apply coordinated ALINEA
-                                    q, r = coor_alinea(q_prev[ramp_id], occ, K_a, occ_targ, flow_buffers[ramp_id], weights)
+                                    q, r = C_alinea(q_prev[ramp_id], occ, K_a, occ_targ, flow_buffers[ramp_id], weights)
                                     q_prev[ramp_id] = q
                                 
                                 # Control traffic light (except for METALINE which handles this internally)
@@ -1110,7 +1110,7 @@ def run_single_simulation(args):
     print(f"\nAll {len(SEEDS)} simulations completed. Generating analysis...")
     
     # Generate comprehensive analysis report with proper naming
-    if controller == "coor_alinea":
+    if controller == "C_alinea":
         analysis_filename = f"analysis_{controller}_{n_neighbors}neigh_method{method}_K{k_values[0]}_target{occ_values[0]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
     elif controller in ["no_control", "metaline"]:
         analysis_filename = f"analysis_{controller}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
@@ -1123,7 +1123,7 @@ def run_single_simulation(args):
         f.write(f"TRAFFIC SIMULATION ANALYSIS REPORT - {controller.upper()}\n")
         
         # Add controller-specific parameters to header
-        if controller == "coor_alinea":
+        if controller == "C_alinea":
             f.write(f"K_a = {k_values[0]}, Occupancy Target = {occ_values[0]}%\n")
             f.write(f"Number of neighbors = {n_neighbors}\n")
             f.write(f"Weight calculation method = {method}\n")
@@ -1245,7 +1245,7 @@ def run_single_simulation(args):
             })
 
         # Generate CSV filename based on controller type
-        if controller == "coor_alinea":
+        if controller == "C_alinea":
             segments_csv = f"segments_{controller}_{n_neighbors}neigh_method{method}_K{k_values[0]}_T{occ_values[0]}_{datetime.now():%Y%m%d_%H%M%S}.csv"
         elif controller in ["no_control", "metaline"]:
             segments_csv = f"segments_{controller}_{datetime.now():%Y%m%d_%H%M%S}.csv"
@@ -1276,9 +1276,9 @@ def print_help():
     print("\nAvailable Controllers:")
     print("  NO_CONTROL            No ramp metering (baseline)")
     print("  ALINEA               Standard ALINEA algorithm") 
-    print("  COOR_ALINEA          Coordinated ALINEA algorithm")
+    print("  C_ALINEA          Coordinated ALINEA algorithm")
     print("  METALINE             Network-wide density control (METALINE)")
-    print("\nAdditional Options for COOR_ALINEA:")
+    print("\nAdditional Options for C_ALINEA:")
     print("  --neighbors [N]       Number of neighbors (1, 2, or 3)")
     print("  --method [M]          Weight calculation method (1 or 2)")
     print("\nExample Commands:")
@@ -1287,7 +1287,7 @@ def print_help():
     print("\n2. Standard ALINEA:")
     print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA")
     print("\n3. Coordinated ALINEA with 2 neighbors, method 1:")
-    print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1")
+    print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller C_ALINEA --neighbors 2 --method 1")
     print("\n4. METALINE network-wide control:")
     print("   python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE")
     print("\nNote: Update the configuration file path in the code before running.")
@@ -1334,18 +1334,18 @@ def parse_arguments():
         sys.exit(1)
     
     # Validate controller
-    valid_controllers = ['NO_CONTROL', 'ALINEA', 'COOR_ALINEA', 'METALINE']
+    valid_controllers = ['NO_CONTROL', 'ALINEA', 'C_ALINEA', 'METALINE']
     if args['controller'] not in valid_controllers:
         print(f"Error: Invalid controller '{args['controller']}'. Must be one of: {valid_controllers}")
         sys.exit(1)
     
-    # Validate COOR_ALINEA specific arguments
-    if args['controller'] == 'COOR_ALINEA':
+    # Validate C_ALINEA specific arguments
+    if args['controller'] == 'C_ALINEA':
         if 'neighbors' not in args:
-            print("Error: --neighbors is required for COOR_ALINEA")
+            print("Error: --neighbors is required for C_ALINEA")
             sys.exit(1)
         if 'method' not in args:
-            print("Error: --method is required for COOR_ALINEA")
+            print("Error: --method is required for C_ALINEA")
             sys.exit(1)
         if args['neighbors'] not in [1, 2, 3]:
             print("Error: --neighbors must be 1, 2, or 3")
@@ -1363,7 +1363,7 @@ if __name__ == "__main__":
     Command line usage examples:
     python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller NO_CONTROL
     python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA
-    python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1
+    python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller C_ALINEA --neighbors 2 --method 1
     python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE
     """
     
