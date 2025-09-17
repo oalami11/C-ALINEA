@@ -99,11 +99,45 @@ This repository provides the complete simulation framework and implementation co
 
 ## Install & Run Guide
 ```
-pip install -r Requirement.txt
-python code/RunSimulationRampMetering.py --help
-# python RunSimulationRampMetering.py --sumo-path [A] --controller [B] --
-
+pip install -r requirements.txt
+python codecoor.py --help
+# python codecoor.py --sumo-path [A] --controller [B]
 ```
+To run the simulation, two to three run arguments are necessary:
+
+- [A] path to SUMO installation directory
+- [B] control algorithm, Options: ["NO_CONTROL", "ALINEA", "COOR_ALINEA", "METALINE"]
+
+Additional parameters for COOR_ALINEA:
+- --neighbors [N] Number of neighbors (1, 2, or 3)
+- --method [M] Weight calculation method (1 or 2)
+
+## Example Command To Launch Simulation
+
+with NO_CONTROL (baseline)
+```
+python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller NO_CONTROL
+```
+with Standard ALINEA controller
+```
+python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA
+```
+with Coordinated ALINEA controller
+```
+python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1
+```
+with METALINE controller
+```
+python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE
+```
+After running, a folder "output" will appear in the current directory that contains log files created by SUMO, with following contents:
+- tripinfo_[controller]_[parameters]_[seed].xml
+- summary_[controller]_[parameters]_[seed].xml
+
+Additionally, the following analysis files will be generated:
+- analysis_[controller]_[timestamp].txt (comprehensive metrics report)
+- heatmap_with_timeloss_[controller]_[timestamp].png (visualization)
+- segments_[controller]_[timestamp].csv (edge statistics)
 
 ## 📑 Log Files
 
