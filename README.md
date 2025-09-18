@@ -69,7 +69,7 @@ This repository provides the complete simulation framework and implementation co
 ```
 /
 ├── code/
-│   ├── RunSimulation.py
+│   ├── RunSimulationRampMetering.py
 │   └── ...
 ├── data/
 │   ├── RoadSequence_of_Edges.xlsx
@@ -99,9 +99,9 @@ This repository provides the complete simulation framework and implementation co
 
 ## Install & Run Guide
 ```
-pip install -r requirements.txt
-python codecoor.py --help
-# python codecoor.py --sumo-path [A] --controller [B]
+pip install -r Requirement.txt
+python RunSimulationRampMetering.py --help
+# python RunSimulationRampMetering.py --sumo-path [A] --controller [B]
 ```
 To run the simulation, two to three run arguments are necessary:
 
@@ -116,19 +116,19 @@ Additional parameters for COOR_ALINEA:
 
 with NO_CONTROL (baseline)
 ```
-python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller NO_CONTROL
+python RunSimulationRampMetering.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller NO_CONTROL
 ```
 with Standard ALINEA controller
 ```
-python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA
+python RunSimulationRampMetering.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller ALINEA
 ```
 with Coordinated ALINEA controller
 ```
-python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1
+python RunSimulationRampMetering.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller COOR_ALINEA --neighbors 2 --method 1
 ```
 with METALINE controller
 ```
-python codecoor.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE
+python RunSimulationRampMetering.py --sumo-path ./sumo-1.19.0/bin/sumo-gui.exe --controller METALINE
 ```
 After running, a folder "output" will appear in the current directory that contains log files created by SUMO, with following contents:
 - tripinfo_[controller]_[parameters]_[seed].xml
@@ -154,6 +154,6 @@ Additionally, the following analysis files will be generated:
 If you found this repository helpful, please cite our work:
 
 ```
-Kevin Riehl, Omar Alami Badissi, Anastasios Kouvelas
+Kevin Riehl, Omar Alami Badissi, Anastasios Kouvelas, Michail A. Makridis
 "C-ALINEA – Coordinated Control Algorithm for Fairness in Ramp Metering", 2025.
 ```
